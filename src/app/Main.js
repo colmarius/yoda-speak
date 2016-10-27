@@ -40,8 +40,6 @@ class Main extends Component {
     this.setState({
       userText: evt.target.value,
     })
-
-    console.log('new text', this.state.text)
   }
 
   handleRequestClose = () => {
@@ -51,7 +49,6 @@ class Main extends Component {
   }
 
   handleTouchTap = () => {
-    console.log('handleTouchTap');
     yodaTranslate(this.state.userText, (translated) => {
       this.setState({
         open: true,
