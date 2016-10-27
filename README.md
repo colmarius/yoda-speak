@@ -1,12 +1,10 @@
-# [Material-UI](http://callemall.github.io/material-ui/) - Example Webpack Project
+# [Yoda Speak](http://colmarius.github.io/yoda-speak/)
 
-This is an example project that uses [Material-UI](http://callemall.github.io/material-ui/).
+This is an example with material-ui, React and Mashape API.
 
 ## Installation
 
-After cloning the repository, install dependencies:
 ```sh
-cd <project folder>/material-ui/examples/webpack-example
 npm install
 ```
 
