@@ -37,8 +37,12 @@ class Main extends Component {
   }
 
   handleTextChange = (evt) => {
+    const text = evt.target.value;
+    const userTextError = text ? null : 'Missing, something is.';
+
     this.setState({
-      userText: evt.target.value,
+      userText: text,
+      userTextError,
     })
   }
 
@@ -49,12 +53,19 @@ class Main extends Component {
   }
 
   handleTouchTap = () => {
+    if (this.validate()) return
+
     yodaTranslate(this.state.userText, (translated) => {
       this.setState({
         open: true,
         yodaText: translated,
       });
     })
+  }
+
+  validate = () => {
+    if (this.state.userTextError) return true;
+    return false;
   }
 
   render() {
@@ -85,12 +96,14 @@ class Main extends Component {
             multiLine={ true }
             onChange={ this.handleTextChange }
             style={{textAlign: 'left'}}
+            errorText={ this.state.userTextError }
           />
           <br/>
           <RaisedButton
             label="Ask me son"
             secondary={true}
             onTouchTap={ this.handleTouchTap }
+            disabled={ this.state.userTextError ? true : false }
           />
         </div>
       </MuiThemeProvider>
