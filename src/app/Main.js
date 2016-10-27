@@ -8,7 +8,9 @@ import {
   Dialog,
   FlatButton,
   RaisedButton,
+  TextField,
 } from 'material-ui';
+import { yodaTranslate } from './client'
 
 const styles = {
   container: {
@@ -29,7 +31,17 @@ class Main extends Component {
 
     this.state = {
       open: false,
+      userText: null,
+      yodaText: null,
     };
+  }
+
+  handleTextChange = (evt) => {
+    this.setState({
+      userText: evt.target.value,
+    })
+
+    console.log('new text', this.state.text)
   }
 
   handleRequestClose = () => {
@@ -39,9 +51,13 @@ class Main extends Component {
   }
 
   handleTouchTap = () => {
-    this.setState({
-      open: true,
-    });
+    console.log('handleTouchTap');
+    yodaTranslate(this.state.userText, (translated) => {
+      this.setState({
+        open: true,
+        yodaText: translated,
+      });
+    })
   }
 
   render() {
@@ -57,19 +73,27 @@ class Main extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.container}>
           <Dialog
-            open={this.state.open}
-            title="Super Secret Password"
+            open={ this.state.open }
+            title="Your answer from Yoda"
             actions={standardActions}
             onRequestClose={this.handleRequestClose}
           >
-            1-2-3-4-5
+            { this.state.yodaText }
           </Dialog>
-          <h1>Material-UI</h1>
-          <h2>example project</h2>
+          <h1>Yoda Speak</h1>
+          <h2>Me anything my son ask.  Reply at once, will I.</h2>
+          <TextField
+            hintText="Some text"
+            floatingLabelText="Like Yoda speak."
+            multiLine={ true }
+            onChange={ this.handleTextChange }
+            style={{textAlign: 'left'}}
+          />
+          <br/>
           <RaisedButton
-            label="Super Secret Password"
+            label="Ask me son"
             secondary={true}
-            onTouchTap={this.handleTouchTap}
+            onTouchTap={ this.handleTouchTap }
           />
         </div>
       </MuiThemeProvider>
