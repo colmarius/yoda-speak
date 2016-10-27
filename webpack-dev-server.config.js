@@ -1,3 +1,6 @@
+const NODE_ENV = process.env.NODE_ENV;
+const dotenv = require('dotenv');
+
 const webpack = require('webpack');
 const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
@@ -47,5 +50,22 @@ const config = {
     ],
   },
 };
+
+// ENV variables
+const envVariables = dotenv.config();
+const defines =
+  Object.keys(envVariables)
+  .reduce((memo, key) => {
+    const val = JSON.stringify(envVariables[key]);
+    memo[`__${key.toUpperCase()}__`] = val;
+    return memo;
+  }, {
+    __NODE_ENV__: JSON.stringify(NODE_ENV)
+  });
+
+config.plugins = [
+  new webpack.DefinePlugin(defines)
+].concat(config.plugins);
+// END ENV variables
 
 module.exports = config;

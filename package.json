@@ -24,6 +24,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "material-ui": "^0.16.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
