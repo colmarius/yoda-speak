@@ -1,7 +1,7 @@
 {
-  "name": "material-ui-example-webpack",
+  "name": "yoda-speak",
   "version": "0.15.0",
-  "description": "Sample project that uses Material-UI",
+  "description": "Sample project that uses Material-UI and Mashape Yoda Speak",
   "repository": {
     "type": "git",
     "url": "https://github.com/callemall/material-ui.git"
