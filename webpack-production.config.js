@@ -7,8 +7,6 @@ const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
-
-
 const config = {
   entry: [
     'whatwg-fetch',
@@ -52,5 +50,22 @@ const config = {
     ],
   },
 };
+
+// ENV variables
+const envVariables = dotenv.config();
+const defines =
+  Object.keys(envVariables)
+  .reduce((memo, key) => {
+    const val = JSON.stringify(envVariables[key]);
+    memo[`__${key.toUpperCase()}__`] = val;
+    return memo;
+  }, {
+    __NODE_ENV__: JSON.stringify(NODE_ENV)
+  });
+
+config.plugins = [
+  new webpack.DefinePlugin(defines)
+].concat(config.plugins);
+// END ENV variables
 
 module.exports = config;
